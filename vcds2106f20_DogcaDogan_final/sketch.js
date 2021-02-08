@@ -6,6 +6,8 @@ data visualization
 
 direction References =https://www.openprocessing.org/sketch/336862
 
+githublink= https://github.com/dogcadogan/vcds2106f20_DogcaDogan_final
+
 number of star cloudyPercentage
 rotation windDeg
 frameRate windSpeed
@@ -32,9 +34,9 @@ function setup() {
 
   mic = new p5.AudioIn();
   mic.start();
-  x=10;
+  x = 10;
 
-
+  angleMode(DEGREES);
 
   //fill(255, 150);
 }
@@ -42,7 +44,7 @@ function setup() {
 function draw() {
 
   background(0);
-push();
+  push();
   c = map(mic.getLevel(), 0, 0.5, 5, 80);
 
 
@@ -52,49 +54,49 @@ push();
     let windSpeed = lW.getNum(i, "wind_speed");
     let cloudyPercentage = lW.getNum(i, "clouds_all");
     let humidity = lW.getNum(i, "humidity");
-    let windDeg= lW.getNum(i, "wind_deg");
+    let windDeg = lW.getNum(i, "wind_deg");
 
-    a = map(windSpeed, 0.5, 7.7, 0, width);
-    b = map(cloudyPercentage, 0, 100, 0, height);
-    d = map(humidity, 49, 88, 30, 255);
-    e = map(windDeg, 0, 277, 0, 3.0);
+    a = map(windSpeed, 0.5, 7.7, 0.2, 1);
+    //  b = map(cloudyPercentage, 0, 100, 0, height);
+    d = map(humidity, 0, 100, 30, 255);
 
-    rot= random(map(e,0,277,60,180));
 
-    fill(d,c);
 
-    frameRate(random(a));
 
-push();
-   //rotate(random(d,-e));
-   translate(width / 2, height / 2);
-   rotate(rot);
+    //  fill(d,c);
 
-    circle(a , b, c);
+  //  frameRate(a);
 
-      noFill();
-      stroke(d,0,d,d);
-      strokeWeight(1);
+    push();
+    //rotate(random(d,-e));
+    translate(width / 2, height / 2);
+    rotate(windDeg);
 
-for (let i = 0; i < cloudyPercentage; i+=10) {
+    //circle(a , b, c);
 
-          line(x +i, 150 , x+40+i , 20 );
-          line(x+40+i , 20 , x+90 +i, 150 );
-          line(x+90+i , 150, x +i, 80 );
-          line(x+i , 80 , x + 90 +i, 80 );
-          line(x + 90 +i, 80 , x +i, 150 );
+    noFill();
+    stroke(d, 0, d, d);
+    strokeWeight(2);
 
-            circle(x +i, 10, c);
-}
+    for (let i = 0; i < cloudyPercentage; i += 10) {
 
-x += 0.5
-if (x > width/2) {
-x = 0;
-}
-pop();
-//star();
+      line(x + i, 150, x + 40 + i, 20);
+      line(x + 40 + i, 20, x + 90 + i, 150);
+      line(x + 90 + i, 150, x + i, 80);
+      line(x + i, 80, x + 90 + i, 80);
+      line(x + 90 + i, 80, x + i, 150);
+
+      //circle(x +i, 10, c);
+    }
+
+    x += a;
+    if (x > width) {
+      x = 0;
+    }
+    pop();
+    //star();
   }
-//x = cloudyPercentage += 1;
+  //x = cloudyPercentage += 1;
 
 }
 
